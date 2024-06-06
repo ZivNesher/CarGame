@@ -269,8 +269,9 @@
                 app:icon="@drawable/leftarrow"
                 app:iconSize="100dp"
                 app:iconGravity="start"
+                app:iconTint="#e3e019"
+                android:background="@android:color/transparent"/>
 
-                />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonRight"
@@ -280,7 +281,8 @@
                 app:icon="@drawable/rightarrow"
                 app:iconGravity="end"
                 app:iconSize="100dp"
-                />
+                app:iconTint="#e3e019"
+            android:background="@android:color/transparent"/>
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
