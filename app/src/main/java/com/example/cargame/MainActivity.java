@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
                         obstacles[i][j].setVisibility(View.INVISIBLE);
                     } else {
                         obstacles[i + 1][j].setVisibility(View.VISIBLE);
+
                     }
                 }
             }
