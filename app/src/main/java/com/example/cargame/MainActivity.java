@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -118,8 +119,14 @@ public class MainActivity extends AppCompatActivity {
         }
         scoreValue = findViewById(R.id.ScoreValue);
         int currentScore = Integer.parseInt(scoreValue.getText().toString());
-        currentScore += 10;
+        if (lives > 0) {
+            currentScore += 10;
+        }
         updateScore(String.valueOf(currentScore));
+        if(lives == 0) {
+            Toast.makeText(this, "Game Over", Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 
     private void initGameMatrix() {
@@ -152,4 +159,5 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+
 
