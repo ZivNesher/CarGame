@@ -1,7 +1,9 @@
 package com.example.cargame;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -57,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         handler.post(runnable);
+
     }
 
     private void moveObstacles() {
@@ -71,14 +74,20 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Check if the car is hit by an obstacle
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         if (obstacles[4][carPosition].getVisibility() == View.VISIBLE) {
             lives -= 1;
+            v.vibrate(400);
             if(lives == 2) {
                 ImageView heart3 = findViewById(R.id.heart3);
                 heart3.setImageResource(R.drawable.nolive);
+                Toast.makeText(this, "Crashed", Toast.LENGTH_SHORT).show();
+
             } else if(lives == 1) {
                 ImageView heart2 = findViewById(R.id.heart2);
                 heart2.setImageResource(R.drawable.nolive);
+                Toast.makeText(this, "OOPS! watch out", Toast.LENGTH_SHORT).show();
+
             } else if(lives == 0) {
                 ImageView heart1 = findViewById(R.id.heart1);
                 heart1.setImageResource(R.drawable.nolive);
@@ -159,5 +168,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+
+
 
 
