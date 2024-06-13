@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#A7A3D8">
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:src="@drawable/logo_no_background"></ImageView>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/playButton"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="Play"
+        android:textSize="60dp"
+        android:layout_centerVertical="true"
+        app:backgroundTint="#2240C0"
+        ></com.google.android.material.button.MaterialButton>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/topTenButton"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp"
+        android:text="TOP 10"
+        android:textSize="60dp"
+        android:layout_below="@id/playButton"
+        app:backgroundTint="#2240C0"
+        ></com.google.android.material.button.MaterialButton>
+</RelativeLayout>
