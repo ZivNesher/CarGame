@@ -14,6 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:text="Play"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
         android:textSize="60dp"
         android:layout_centerVertical="true"
         app:backgroundTint="#2240C0"
@@ -27,5 +29,7 @@
         android:textSize="60dp"
         android:layout_below="@id/playButton"
         app:backgroundTint="#2240C0"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
         ></com.google.android.material.button.MaterialButton>
 </RelativeLayout>
