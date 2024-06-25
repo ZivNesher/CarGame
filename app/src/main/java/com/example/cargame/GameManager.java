@@ -103,76 +103,79 @@ public class GameManager {
     }
 
     private void moveObstacles() {
-        // Move existing obstacles down
-        for (int i = obstacles.length - 2; i >= 0; i--) {
-            for (int j = 0; j < obstacles[i].length; j++) {
-                if (obstacles[i][j].getVisibility() == View.VISIBLE) {
-                    obstacles[i + 1][j].setVisibility(View.VISIBLE);
-                    obstacles[i][j].setVisibility(View.INVISIBLE);
+        if (lives > 0) {
+            // Move existing obstacles down
+            for (int i = obstacles.length - 2; i >= 0; i--) {
+                for (int j = 0; j < obstacles[i].length; j++) {
+                    if (obstacles[i][j].getVisibility() == View.VISIBLE) {
+                        obstacles[i + 1][j].setVisibility(View.VISIBLE);
+                        obstacles[i][j].setVisibility(View.INVISIBLE);
+                    }
                 }
             }
-        }
 
-        // Check if the car is hit by an obstacle
-        Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-        if (obstacles[4][carPosition].getVisibility() == View.VISIBLE) {
-            lives -= 1;
-            v.vibrate(400);
-            if (lives == 2) {
-                ImageView heart3 = activity.findViewById(R.id.heart3);
-                heart3.setImageResource(R.drawable.nolive);
-                Toast.makeText(context, "Crashed", Toast.LENGTH_SHORT).show();
-            } else if (lives == 1) {
-                ImageView heart2 = activity.findViewById(R.id.heart2);
-                heart2.setImageResource(R.drawable.nolive);
-                Toast.makeText(context, "OOPS! watch out", Toast.LENGTH_SHORT).show();
-            } else if (lives == 0) {
-                ImageView heart1 = activity.findViewById(R.id.heart1);
-                heart1.setImageResource(R.drawable.nolive);
+
+            // Check if the car is hit by an obstacle
+            Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+            if (obstacles[4][carPosition].getVisibility() == View.VISIBLE) {
+                lives -= 1;
+                v.vibrate(400);
+                if (lives == 2) {
+                    ImageView heart3 = activity.findViewById(R.id.heart3);
+                    heart3.setImageResource(R.drawable.nolive);
+                    Toast.makeText(context, "Crashed", Toast.LENGTH_SHORT).show();
+                } else if (lives == 1) {
+                    ImageView heart2 = activity.findViewById(R.id.heart2);
+                    heart2.setImageResource(R.drawable.nolive);
+                    Toast.makeText(context, "OOPS! watch out", Toast.LENGTH_SHORT).show();
+                } else if (lives == 0) {
+                    ImageView heart1 = activity.findViewById(R.id.heart1);
+                    heart1.setImageResource(R.drawable.nolive);
+                }
+                if (lives == 0) {
+                    stopGame();
+                    Log.d("GameStatus", "Game Over");
+                    activity.showGameOverDialog();
+                }
             }
+
+            // Clear the last row
+            for (int j = 0; j < obstacles[obstacles.length - 1].length; j++) {
+                if (j != carPosition) { // Do not clear the car position
+                    obstacles[obstacles.length - 1][j].setVisibility(View.INVISIBLE);
+                }
+            }
+
+            // Add a random obstacle to the first row if the previous row was empty
+            if (previousRowEmpty) {
+                int randomColumn = random.nextInt(obstacles[0].length);
+                for (int j = 0; j < obstacles[0].length; j++) {
+                    obstacles[0][j].setVisibility(j == randomColumn ? View.VISIBLE : View.INVISIBLE);
+                }
+                previousRowEmpty = false;
+            } else {
+                // Ensure the first row is empty
+                for (int j = 0; j < obstacles[0].length; j++) {
+                    obstacles[0][j].setVisibility(View.INVISIBLE);
+                }
+                previousRowEmpty = true;
+            }
+
+            // Debugging: Log the visibility of obstacles
+            for (int i = 0; i < obstacles.length; i++) {
+                for (int j = 0; j < obstacles[i].length; j++) {
+                    Log.d("ObstacleStatus", "obstacles[" + i + "][" + j + "] visibility: " + (obstacles[i][j].getVisibility() == View.VISIBLE ? "VISIBLE" : "INVISIBLE"));
+                }
+            }
+
+            int currentScore = Integer.parseInt(scoreValue.getText().toString());
+            if (lives > 0) {
+                currentScore += 10;
+            }
+            updateScore(String.valueOf(currentScore));
             if (lives == 0) {
-                stopGame();
-                Log.d("GameStatus", "Game Over");
-                activity.showGameOverDialog();
+                Toast.makeText(context, "Game Over", Toast.LENGTH_SHORT).show();
             }
-        }
-
-        // Clear the last row
-        for (int j = 0; j < obstacles[obstacles.length - 1].length; j++) {
-            if (j != carPosition) { // Do not clear the car position
-                obstacles[obstacles.length - 1][j].setVisibility(View.INVISIBLE);
-            }
-        }
-
-        // Add a random obstacle to the first row if the previous row was empty
-        if (previousRowEmpty) {
-            int randomColumn = random.nextInt(obstacles[0].length);
-            for (int j = 0; j < obstacles[0].length; j++) {
-                obstacles[0][j].setVisibility(j == randomColumn ? View.VISIBLE : View.INVISIBLE);
-            }
-            previousRowEmpty = false;
-        } else {
-            // Ensure the first row is empty
-            for (int j = 0; j < obstacles[0].length; j++) {
-                obstacles[0][j].setVisibility(View.INVISIBLE);
-            }
-            previousRowEmpty = true;
-        }
-
-        // Debugging: Log the visibility of obstacles
-        for (int i = 0; i < obstacles.length; i++) {
-            for (int j = 0; j < obstacles[i].length; j++) {
-                Log.d("ObstacleStatus", "obstacles[" + i + "][" + j + "] visibility: " + (obstacles[i][j].getVisibility() == View.VISIBLE ? "VISIBLE" : "INVISIBLE"));
-            }
-        }
-
-        int currentScore = Integer.parseInt(scoreValue.getText().toString());
-        if (lives > 0) {
-            currentScore += 10;
-        }
-        updateScore(String.valueOf(currentScore));
-        if (lives == 0) {
-            Toast.makeText(context, "Game Over", Toast.LENGTH_SHORT).show();
         }
     }
 
