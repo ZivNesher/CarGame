@@ -32,7 +32,19 @@ public class MainActivity extends AppCompatActivity {
         topTenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle top ten button click (if needed)
+                loadTopTenLayout();
+            }
+        });
+    }
+
+    private void loadTopTenLayout() {
+        setContentView(R.layout.top10);
+        MaterialButton backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadMenuLayout();
+
             }
         });
     }
@@ -71,9 +83,30 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        finish();
+                        loadMenuLayout();
                     }
                 })
                 .show();
     }
+    private void loadMenuLayout() {
+        setContentView(R.layout.menu);
+        gameManager = new GameManager(this, this);
+
+        MaterialButton playButton = findViewById(R.id.playButton);
+        playButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadMainLayout(); // Switch to the main layout when the play button is clicked
+            }
+        });
+
+        MaterialButton topTenButton = findViewById(R.id.topTenButton);
+        topTenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadTopTenLayout();
+            }
+        });
+    }
 }
+

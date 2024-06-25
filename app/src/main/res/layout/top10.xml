@@ -7,7 +7,7 @@
     <ImageView
         android:id="@+id/logo"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="100dp"
         android:src="@drawable/logo_no_background"></ImageView>
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/top10"
@@ -119,4 +119,15 @@
         android:id="@+id/tenth"
         android:textColor="#223FC0"
         ></com.google.android.material.textview.MaterialTextView>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/backButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="Back"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"
+        android:textSize="20dp"
+        android:layout_below="@id/tenth"
+        app:backgroundTint="#2240C0"
+        ></com.google.android.material.button.MaterialButton>
 </RelativeLayout>
