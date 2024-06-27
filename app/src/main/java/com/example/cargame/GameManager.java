@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class GameManager {
     private ImageView[][] obstacles;
-    private int carPosition = 1; // Initially the car is at the third position
+    private int carPosition = 2; // Initially the car is at the third position
     private Handler handler = new Handler();
     private Runnable runnable;
     private Random random = new Random();
@@ -25,6 +25,7 @@ public class GameManager {
     private Context context;
     private MainActivity activity;
     private int speed = 1000;
+    private int carLane = 8;
 
 
 
@@ -35,12 +36,15 @@ public class GameManager {
 
     public void initGameMatrix() {
         obstacles = new ImageView[][]{
-                {activity.findViewById(R.id.l1o1), activity.findViewById(R.id.l1o2), activity.findViewById(R.id.l1o3)},
-                {activity.findViewById(R.id.l2o1), activity.findViewById(R.id.l2o2), activity.findViewById(R.id.l2o3)},
-                {activity.findViewById(R.id.l3o1), activity.findViewById(R.id.l3o2), activity.findViewById(R.id.l3o3)},
-                {activity.findViewById(R.id.l4o1), activity.findViewById(R.id.l4o2), activity.findViewById(R.id.l4o3)},
-                {activity.findViewById(R.id.l5o1), activity.findViewById(R.id.l5o2), activity.findViewById(R.id.l5o3)},
-                {activity.findViewById(R.id.l6o1), activity.findViewById(R.id.l6o2), activity.findViewById(R.id.l6o3)}
+                {activity.findViewById(R.id.l1o1), activity.findViewById(R.id.l1o2), activity.findViewById(R.id.l1o3), activity.findViewById(R.id.l1o4), activity.findViewById(R.id.l1o5)},
+                {activity.findViewById(R.id.l2o1), activity.findViewById(R.id.l2o2), activity.findViewById(R.id.l2o3), activity.findViewById(R.id.l2o4), activity.findViewById(R.id.l2o5)},
+                {activity.findViewById(R.id.l3o1), activity.findViewById(R.id.l3o2), activity.findViewById(R.id.l3o3), activity.findViewById(R.id.l3o4), activity.findViewById(R.id.l3o5)},
+                {activity.findViewById(R.id.l4o1), activity.findViewById(R.id.l4o2), activity.findViewById(R.id.l4o3), activity.findViewById(R.id.l4o4), activity.findViewById(R.id.l4o5)},
+                {activity.findViewById(R.id.l5o1), activity.findViewById(R.id.l5o2), activity.findViewById(R.id.l5o3), activity.findViewById(R.id.l5o4), activity.findViewById(R.id.l5o5)},
+                {activity.findViewById(R.id.l6o1), activity.findViewById(R.id.l6o2), activity.findViewById(R.id.l6o3), activity.findViewById(R.id.l6o4), activity.findViewById(R.id.l6o5)},
+                {activity.findViewById(R.id.l7o1), activity.findViewById(R.id.l7o2), activity.findViewById(R.id.l7o3), activity.findViewById(R.id.l7o4), activity.findViewById(R.id.l7o5)},
+                {activity.findViewById(R.id.l8o1), activity.findViewById(R.id.l8o2), activity.findViewById(R.id.l8o3), activity.findViewById(R.id.l8o4), activity.findViewById(R.id.l8o5)},
+                {activity.findViewById(R.id.l9o1), activity.findViewById(R.id.l9o2), activity.findViewById(R.id.l9o3), activity.findViewById(R.id.l9o4), activity.findViewById(R.id.l9o5)}
         };
         scoreValue = activity.findViewById(R.id.ScoreValue);
     }
@@ -64,7 +68,7 @@ public class GameManager {
 
     private void resetGame() {
         lives = 3;
-        carPosition = 1;
+        carPosition = 2;
         previousRowEmpty = true;
         updateScore("0");
         resetHearts();
@@ -90,12 +94,13 @@ public class GameManager {
                         obstacles[i + 1][j].setVisibility(View.VISIBLE);
                         obstacles[i][j].setVisibility(View.INVISIBLE);
                     }
-                    obstacles[5][j].setImageResource(R.drawable.car);
+                    obstacles[carLane][j].setImageResource(R.drawable.car);
                 }
             }
 
             // Check if the car is hit by an obstacle
-            if (obstacles[4][carPosition].getVisibility() == View.VISIBLE && !("coin".equals(obstacles[4][carPosition].getTag()))){
+            if (obstacles[carLane-1][carPosition].getVisibility() == View.VISIBLE && !("coin".equals(obstacles[carLane-1][carPosition].getTag()))){
+                //todo - check why the car loose lives when it hits the coin
                 lives -= 1;
                 v.vibrate(400);
                 if (lives == 2) {
@@ -117,7 +122,7 @@ public class GameManager {
                 }
             }
             // Check if the car collects a coin
-            if ("coin".equals(obstacles[4][carPosition].getTag())) {
+            if ("coin".equals(obstacles[carLane-1][carPosition].getTag())) {
                 currentScore+=50;
             }
             // Clear the last row
@@ -187,7 +192,7 @@ public class GameManager {
                 obstacles[i][j].setVisibility(View.INVISIBLE);
             }
         }
-        obstacles[5][carPosition].setVisibility(View.VISIBLE);
+        obstacles[carLane][carPosition].setVisibility(View.VISIBLE);
     }
     private void resetHearts() {
         ImageView heart1 = activity.findViewById(R.id.heart1);
@@ -200,18 +205,18 @@ public class GameManager {
     }
 
     public void moveCarRight() {
-        if (carPosition < 2) {
-            obstacles[5][carPosition].setVisibility(View.INVISIBLE);
+        if (carPosition < 4) {
+            obstacles[carLane][carPosition].setVisibility(View.INVISIBLE);
             carPosition += 1;
-            obstacles[5][carPosition].setVisibility(View.VISIBLE);
+            obstacles[carLane][carPosition].setVisibility(View.VISIBLE);
         }
     }
 
     public void moveCarLeft() {
         if (carPosition > 0) {
-            obstacles[5][carPosition].setVisibility(View.INVISIBLE);
+            obstacles[carLane][carPosition].setVisibility(View.INVISIBLE);
             carPosition -= 1;
-            obstacles[5][carPosition].setVisibility(View.VISIBLE);
+            obstacles[carLane][carPosition].setVisibility(View.VISIBLE);
         }
     }
 

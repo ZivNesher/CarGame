@@ -99,6 +99,20 @@
                 android:layout_weight="1"
                 android:src="@drawable/obstacle"
                 android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/l1o4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/obstacle"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/l1o5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/obstacle"
+                android:visibility="invisible"/>
         </LinearLayout>
 
         <LinearLayout
@@ -125,6 +139,20 @@
 
             <ImageView
                 android:id="@+id/l2o3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/obstacle"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/l2o4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/obstacle"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/l2o5"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -162,6 +190,20 @@
                 android:layout_weight="1"
                 android:src="@drawable/obstacle"
                 android:visibility="visible"/>
+            <ImageView
+                android:id="@+id/l3o4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/obstacle"
+                android:visibility="visible"/>
+            <ImageView
+                android:id="@+id/l3o5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/obstacle"
+                android:visibility="visible"/>
         </LinearLayout>
 
         <LinearLayout
@@ -188,6 +230,20 @@
 
             <ImageView
                 android:id="@+id/l4o3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/obstacle"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/l4o4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/obstacle"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/l4o5"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -224,6 +280,152 @@
                 android:layout_weight="1"
                 android:src="@drawable/obstacle"
                 android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/l5o4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/obstacle"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/l5o5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/obstacle"
+                android:visibility="invisible"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/l6o1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/obstacle"
+                android:visibility="visible"/>
+
+            <ImageView
+                android:id="@+id/l6o2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/obstacle"
+                android:visibility="invisible"/>
+
+            <ImageView
+                android:id="@+id/l6o3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/obstacle"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/l6o4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/obstacle"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/l6o5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/obstacle"
+                android:visibility="invisible"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/l7o1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/obstacle"
+                android:visibility="visible"/>
+
+            <ImageView
+                android:id="@+id/l7o2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/obstacle"
+                android:visibility="invisible"/>
+
+            <ImageView
+                android:id="@+id/l7o3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/obstacle"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/l7o4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/obstacle"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/l7o5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/obstacle"
+                android:visibility="invisible"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/l8o1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/obstacle"
+                android:visibility="visible"/>
+
+            <ImageView
+                android:id="@+id/l8o2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/obstacle"
+                android:visibility="invisible"/>
+
+            <ImageView
+                android:id="@+id/l8o3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/obstacle"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/l8o4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/obstacle"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/l8o5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/obstacle"
+                android:visibility="invisible"/>
         </LinearLayout>
 
         <LinearLayout
@@ -234,7 +436,7 @@
 
 
             <ImageView
-                android:id="@+id/l6o1"
+                android:id="@+id/l9o1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -242,15 +444,29 @@
                 android:visibility="invisible"/>
 
             <ImageView
-                android:id="@+id/l6o2"
+                android:id="@+id/l9o2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/car"
+                android:visibility="invisible"/>
+
+            <ImageView
+                android:id="@+id/l9o3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:src="@drawable/car"
                 android:visibility="visible"/>
-
             <ImageView
-                android:id="@+id/l6o3"
+                android:id="@+id/l9o4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/car"
+                android:visibility="invisible"/>
+            <ImageView
+                android:id="@+id/l9o5"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
