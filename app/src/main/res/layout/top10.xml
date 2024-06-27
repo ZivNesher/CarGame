@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#A7A3D8">
+
     <ImageView
         android:id="@+id/logo"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:src="@drawable/logo_no_background"></ImageView>
+        android:src="@drawable/logo_no_background" />
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/top10"
         android:layout_width="match_parent"
@@ -17,108 +19,294 @@
         android:textSize="50dp"
         android:gravity="top|center_horizontal"
         android:layout_below="@id/logo"
-        android:textColor="#223FC0"
-        ></com.google.android.material.textview.MaterialTextView>
-    <com.google.android.material.textview.MaterialTextView
+        android:textColor="#223FC0" />
+
+    <LinearLayout
+        android:id="@+id/top10Container"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="1. 1000"
-        android:textSize="30dp"
-        android:gravity="top|center_horizontal"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_below="@id/top10"
-        android:id="@+id/first"
-        android:textColor="#223FC0"
-        ></com.google.android.material.textview.MaterialTextView>
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="2. 900"
-        android:textSize="30dp"
-        android:gravity="top|center_horizontal"
-        android:layout_below="@id/first"
-        android:id="@+id/second"
-        android:textColor="#223FC0"
-        ></com.google.android.material.textview.MaterialTextView>
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="3. 800"
-        android:textSize="30dp"
-        android:gravity="top|center_horizontal"
-        android:layout_below="@id/second"
-        android:id="@+id/third"
-        android:textColor="#223FC0"
-        ></com.google.android.material.textview.MaterialTextView>
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="4. 700"
-        android:textSize="30dp"
-        android:gravity="top|center_horizontal"
-        android:layout_below="@id/third"
-        android:id="@+id/fourth"
-        android:textColor="#223FC0"
-        ></com.google.android.material.textview.MaterialTextView>
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="5. 600"
-        android:textSize="30dp"
-        android:gravity="top|center_horizontal"
-        android:layout_below="@id/fourth"
-        android:id="@+id/fifth"
-        android:textColor="#223FC0"
-        ></com.google.android.material.textview.MaterialTextView>
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="6. 500"
-        android:textSize="30dp"
-        android:gravity="top|center_horizontal"
-        android:layout_below="@id/fifth"
-        android:id="@+id/sixth"
-        android:textColor="#223FC0"
-        ></com.google.android.material.textview.MaterialTextView>
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="7. 400"
-        android:textSize="30dp"
-        android:gravity="top|center_horizontal"
-        android:layout_below="@id/sixth"
-        android:id="@+id/seventh"
-        android:textColor="#223FC0"
-        ></com.google.android.material.textview.MaterialTextView>
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="8. 300"
-        android:textSize="30dp"
-        android:gravity="top|center_horizontal"
-        android:layout_below="@id/seventh"
-        android:id="@+id/eighth"
-        android:textColor="#223FC0"
-        ></com.google.android.material.textview.MaterialTextView>
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="9. 200"
-        android:textSize="30dp"
-        android:gravity="top|center_horizontal"
-        android:layout_below="@id/eighth"
-        android:id="@+id/ninth"
-        android:textColor="#223FC0"
-        ></com.google.android.material.textview.MaterialTextView>
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="10. 100"
-        android:textSize="30dp"
-        android:gravity="top|center_horizontal"
-        android:layout_below="@id/ninth"
-        android:id="@+id/tenth"
-        android:textColor="#223FC0"
-        ></com.google.android.material.textview.MaterialTextView>
+        android:paddingTop="10dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="20dp">
+
+        <!-- Row for the first score -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/name1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Name"
+                android:textSize="20dp"
+                android:gravity="center_vertical"
+                android:textColor="#223FC0" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/score1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1000"
+                android:textSize="20dp"
+                android:gravity="center_vertical"
+                android:textColor="#223FC0" />
+        </LinearLayout>
+
+        <!-- Row for the second score -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/name2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Name"
+                android:textSize="20dp"
+                android:gravity="center_vertical"
+                android:textColor="#223FC0" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/score2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="900"
+                android:textSize="20dp"
+                android:gravity="center_vertical"
+                android:textColor="#223FC0" />
+        </LinearLayout>
+
+        <!-- Repeat for the remaining scores -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/name3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Name"
+                android:textSize="20dp"
+                android:gravity="center_vertical"
+                android:textColor="#223FC0" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/score3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="800"
+                android:textSize="20dp"
+                android:gravity="center_vertical"
+                android:textColor="#223FC0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/name4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Name"
+                android:textSize="20dp"
+                android:gravity="center_vertical"
+                android:textColor="#223FC0" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/score4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="700"
+                android:textSize="20dp"
+                android:gravity="center_vertical"
+                android:textColor="#223FC0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/name5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Name"
+                android:textSize="20dp"
+                android:gravity="center_vertical"
+                android:textColor="#223FC0" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/score5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="600"
+                android:textSize="20dp"
+                android:gravity="center_vertical"
+                android:textColor="#223FC0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/name6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Name"
+                android:textSize="20dp"
+                android:gravity="center_vertical"
+                android:textColor="#223FC0" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/score6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="500"
+                android:textSize="20dp"
+                android:gravity="center_vertical"
+                android:textColor="#223FC0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/name7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Name"
+                android:textSize="20dp"
+                android:gravity="center_vertical"
+                android:textColor="#223FC0" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/score7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="400"
+                android:textSize="20dp"
+                android:gravity="center_vertical"
+                android:textColor="#223FC0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/name8"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Name"
+                android:textSize="20dp"
+                android:gravity="center_vertical"
+                android:textColor="#223FC0" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/score8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="300"
+                android:textSize="20dp"
+                android:gravity="center_vertical"
+                android:textColor="#223FC0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/name9"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Name"
+                android:textSize="20dp"
+                android:gravity="center_vertical"
+                android:textColor="#223FC0" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/score9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="200"
+                android:textSize="20dp"
+                android:gravity="center_vertical"
+                android:textColor="#223FC0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/name10"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Name"
+                android:textSize="20dp"
+                android:gravity="center_vertical"
+                android:textColor="#223FC0" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/score10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100"
+                android:textSize="20dp"
+                android:gravity="center_vertical"
+                android:textColor="#223FC0" />
+        </LinearLayout>
+
+    </LinearLayout>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/backButton"
         android:layout_width="100dp"
@@ -127,7 +315,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp"
         android:textSize="20dp"
-        android:layout_below="@id/tenth"
-        app:backgroundTint="#2240C0"
-        ></com.google.android.material.button.MaterialButton>
+        android:layout_below="@id/top10Container"
+        app:backgroundTint="#2240C0" />
+
 </RelativeLayout>

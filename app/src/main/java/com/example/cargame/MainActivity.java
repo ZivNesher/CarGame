@@ -2,23 +2,28 @@ package com.example.cargame;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.button.MaterialButton;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private GameManager gameManager;
+    public static final String SP_KEY_NAME = "NAME";
+    public static final String SP_KEY_SCORE = "SCORE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MSPV3.init(this); // Initialize MSPV3
         setContentView(R.layout.menu); // Set the menu layout as the initial view
 
         gameManager = new GameManager(this, this);
+        v3();
 
         MaterialButton playButton = findViewById(R.id.playButton);
         playButton.setOnClickListener(new View.OnClickListener() {
@@ -37,14 +42,23 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void v3() {
+        MSPV3.getInstance().saveScore("Guy", 1000);
+
+        List<MSPV3.ScoreEntry> scores = MSPV3.getInstance().getTopScores();
+        for (MSPV3.ScoreEntry score : scores) {
+            Log.d("pttt", "Name: " + score.name + ", Score: " + score.score);
+        }
+    }
+
     private void loadTopTenLayout() {
         setContentView(R.layout.top10);
+        gameManager.loadTopTenScores();
         MaterialButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loadMenuLayout();
-
             }
         });
     }
@@ -88,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .show();
     }
+
     private void loadMenuLayout() {
         setContentView(R.layout.menu);
         gameManager = new GameManager(this, this);
@@ -109,4 +124,3 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 }
-
