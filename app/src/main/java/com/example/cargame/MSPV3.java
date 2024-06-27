@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
+import android.util.Log;
 
 public class MSPV3 {
 
@@ -30,32 +31,42 @@ public class MSPV3 {
     }
 
     public void saveScore(String name, int score) {
-        Set<String> names = prefs.getStringSet(NAMES_KEY, new HashSet<>());
-        Set<String> scores = prefs.getStringSet(SCORES_KEY, new HashSet<>());
+        try {
+            Set<String> names = prefs.getStringSet(NAMES_KEY, new HashSet<>());
+            Set<String> scores = prefs.getStringSet(SCORES_KEY, new HashSet<>());
 
-        names.add(name);
-        scores.add(String.valueOf(score));
+            names.add(name);
+            scores.add(String.valueOf(score));
 
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putStringSet(NAMES_KEY, names);
-        editor.putStringSet(SCORES_KEY, scores);
-        editor.apply();
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putStringSet(NAMES_KEY, names);
+            editor.putStringSet(SCORES_KEY, scores);
+            editor.apply();
+
+            Log.d("MSPV3", "Saved score: " + name + " - " + score);
+        } catch (Exception e) {
+            Log.e("MSPV3", "Error saving score", e);
+        }
     }
 
     public List<ScoreEntry> getTopScores() {
-        Set<String> names = prefs.getStringSet(NAMES_KEY, new HashSet<>());
-        Set<String> scores = prefs.getStringSet(SCORES_KEY, new HashSet<>());
-
         List<ScoreEntry> scoreEntries = new ArrayList<>();
-        if (!names.isEmpty() && !scores.isEmpty()) {
-            List<String> nameList = new ArrayList<>(names);
-            List<String> scoreList = new ArrayList<>(scores);
+        try {
+            Set<String> names = prefs.getStringSet(NAMES_KEY, new HashSet<>());
+            Set<String> scores = prefs.getStringSet(SCORES_KEY, new HashSet<>());
 
-            for (int i = 0; i < nameList.size(); i++) {
-                scoreEntries.add(new ScoreEntry(nameList.get(i), Integer.parseInt(scoreList.get(i))));
+            if (!names.isEmpty() && !scores.isEmpty()) {
+                List<String> nameList = new ArrayList<>(names);
+                List<String> scoreList = new ArrayList<>(scores);
+
+                for (int i = 0; i < nameList.size(); i++) {
+                    scoreEntries.add(new ScoreEntry(nameList.get(i), Integer.parseInt(scoreList.get(i))));
+                }
             }
+            Collections.sort(scoreEntries, Collections.reverseOrder());
+        } catch (Exception e) {
+            Log.e("MSPV3", "Error getting top scores", e);
         }
-        Collections.sort(scoreEntries, Collections.reverseOrder());
         return scoreEntries;
     }
 

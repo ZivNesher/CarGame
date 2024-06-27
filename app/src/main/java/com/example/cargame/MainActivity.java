@@ -43,11 +43,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void v3() {
-        MSPV3.getInstance().saveScore("Guy", 1000);
+        try {
+            MSPV3.getInstance().saveScore("Ziv", 1000);
 
-        List<MSPV3.ScoreEntry> scores = MSPV3.getInstance().getTopScores();
-        for (MSPV3.ScoreEntry score : scores) {
-            Log.d("pttt", "Name: " + score.name + ", Score: " + score.score);
+            List<MSPV3.ScoreEntry> scores = MSPV3.getInstance().getTopScores();
+            for (MSPV3.ScoreEntry score : scores) {
+                Log.d("pttt", "Name: " + score.name + ", Score: " + score.score);
+            }
+        } catch (Exception e) {
+            Log.e("MainActivity", "Error in v3 method", e);
         }
     }
 
