@@ -1,16 +1,13 @@
 package com.example.cargame;
+
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.google.android.material.textview.MaterialTextView;
-
 import java.util.Random;
 
 public class GameManager {
@@ -26,8 +23,6 @@ public class GameManager {
     private MainActivity activity;
     private int speed = 1000;
     private int carLane = 8;
-
-
 
     public GameManager(Context context, MainActivity activity) {
         this.context = context;
@@ -75,7 +70,6 @@ public class GameManager {
         clearObstacles();
     }
 
-
     private void moveObstacles() {
         int currentScore = Integer.parseInt(scoreValue.getText().toString());
         Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
@@ -85,8 +79,8 @@ public class GameManager {
                 for (int j = 0; j < obstacles[i].length; j++) {
                     // Check if the tag of obstacles[i][j] is equal to "coin"
                     if ("coin".equals(obstacles[i][j].getTag())) {
-                        obstacles[i+1][j].setImageResource(R.drawable.coin);
-                        obstacles[i+1][j].setTag("coin"); // Don't forget to set the tag as well
+                        obstacles[i + 1][j].setImageResource(R.drawable.coin);
+                        obstacles[i + 1][j].setTag("coin"); // Don't forget to set the tag as well
                         obstacles[i][j].setImageResource(R.drawable.obstacle);
                         obstacles[i][j].setTag("obstacle"); // Don't forget to set the tag as well
                     }
@@ -99,7 +93,7 @@ public class GameManager {
             }
 
             // Check if the car is hit by an obstacle
-            if (obstacles[carLane-1][carPosition].getVisibility() == View.VISIBLE && !("coin".equals(obstacles[carLane-1][carPosition].getTag()))){
+            if (obstacles[carLane - 1][carPosition].getVisibility() == View.VISIBLE && !("coin".equals(obstacles[carLane - 1][carPosition].getTag()))) {
                 //todo - check why the car loose lives when it hits the coin
                 lives -= 1;
                 v.vibrate(400);
@@ -118,12 +112,12 @@ public class GameManager {
                 if (lives == 0) {
                     stopGame();
                     Log.d("GameStatus", "Game Over");
-                    activity.showGameOverDialog();
+                    activity.showGameOverDialog(currentScore);
                 }
             }
             // Check if the car collects a coin
-            if ("coin".equals(obstacles[carLane-1][carPosition].getTag())) {
-                currentScore+=50;
+            if ("coin".equals(obstacles[carLane - 1][carPosition].getTag())) {
+                currentScore += 50;
             }
             // Clear the last row
             for (int j = 0; j < obstacles[obstacles.length - 1].length; j++) {
@@ -135,14 +129,13 @@ public class GameManager {
 
             debugObstacleVisibility();
 
-
             if (lives > 0) {
                 currentScore += 10;
                 // Increase speed every 100 points
                 speed = 1000 - (currentScore / 100) * 50;
-//                if (currentScore % 100 == 0) {
-//                    speed -= 50;
-//                }
+                // if (currentScore % 100 == 0) {
+                //     speed -= 50;
+                // }
             }
 
             updateScore(String.valueOf(currentScore));
@@ -167,7 +160,7 @@ public class GameManager {
             int randomColumn = random.nextInt(obstacles[0].length);
             for (int j = 0; j < obstacles[0].length; j++) {
                 obstacles[0][j].setVisibility(j == randomColumn ? View.VISIBLE : View.INVISIBLE);
-                if(currentScore % 50 == 10){
+                if (currentScore % 50 == 10) {
                     int col = randomColumn;
                     obstacles[0][col].setImageResource(R.drawable.coin);
                     obstacles[0][col].setTag("coin");
@@ -194,6 +187,7 @@ public class GameManager {
         }
         obstacles[carLane][carPosition].setVisibility(View.VISIBLE);
     }
+
     private void resetHearts() {
         ImageView heart1 = activity.findViewById(R.id.heart1);
         ImageView heart2 = activity.findViewById(R.id.heart2);
@@ -219,6 +213,4 @@ public class GameManager {
             obstacles[carLane][carPosition].setVisibility(View.VISIBLE);
         }
     }
-
-
 }
