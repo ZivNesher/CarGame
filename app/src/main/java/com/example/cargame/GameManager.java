@@ -94,6 +94,7 @@ public class GameManager {
 
             // Check if the car is hit by an obstacle
             if (obstacles[carLane - 1][carPosition].getVisibility() == View.VISIBLE && !("coin".equals(obstacles[carLane - 1][carPosition].getTag()))) {
+                //todo - check why the car loose lives when it hits the coin
                 lives -= 1;
                 v.vibrate(400);
                 if (lives == 2) {
@@ -131,9 +132,10 @@ public class GameManager {
             if (lives > 0) {
                 currentScore += 10;
                 // Increase speed every 100 points
-                 if (currentScore % 100 == 0 && speed>200) {
-                     speed -= 50;
-                 }
+                speed = 1000 - (currentScore / 100) * 50;
+                // if (currentScore % 100 == 0) {
+                //     speed -= 50;
+                // }
             }
 
             updateScore(String.valueOf(currentScore));

@@ -1,6 +1,11 @@
 package com.example.cargame;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,12 +18,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
     private GameManager gameManager;
     private MSPV3 msp;
     private List<MSPV3.ScoreEntry> top10Scores;
     private static final String TAG = "MainActivity";
+    private SensorManager sensorManager;
+    private Sensor accelerometer;
+    private long lastMoveTime = 0;
+    private static final int MOVE_DELAY = 500; // Delay in milliseconds
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +62,50 @@ public class MainActivity extends AppCompatActivity {
                 loadTopTenLayout();
             }
         });
+
+        // Initialize sensor manager and accelerometer
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        if (sensorManager != null) {
+            accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (accelerometer != null) {
+            sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (accelerometer != null) {
+            sensorManager.unregisterListener(this);
+        }
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            float x = event.values[0];
+            long currentTime = System.currentTimeMillis();
+            if (currentTime - lastMoveTime > MOVE_DELAY) {
+                if (x > 1.5) {  // More sensitive left tilt
+                    gameManager.moveCarLeft();
+                    lastMoveTime = currentTime;
+                } else if (x < -1.5) {  // More sensitive right tilt
+                    gameManager.moveCarRight();
+                    lastMoveTime = currentTime;
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        // Do nothing
     }
 
     private void loadTopTenLayout() {
