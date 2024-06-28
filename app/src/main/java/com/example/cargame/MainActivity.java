@@ -120,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 String name = input.getText().toString();
                 Log.d(TAG, "Name entered: " + name);
                 saveScore(name, score);
+                loadTopTenLayout(); // Switch to the top 10 layout after saving the score
             }
         });
 
