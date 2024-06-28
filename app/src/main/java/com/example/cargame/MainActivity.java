@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private Sensor accelerometer;
     private long lastMoveTime = 0;
     private static final int MOVE_DELAY = 500; // Delay in milliseconds
+    private boolean useSensor = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadMainLayout(); // Switch to the main layout when the play button is clicked
+                showModeSelectionDialog(); // Show the mode selection dialog when the play button is clicked
             }
         });
 
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected void onResume() {
         super.onResume();
-        if (accelerometer != null) {
+        if (useSensor && accelerometer != null) {
             sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
         }
     }
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+        if (useSensor && event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             float x = event.values[0];
             long currentTime = System.currentTimeMillis();
             if (currentTime - lastMoveTime > MOVE_DELAY) {
@@ -106,6 +107,32 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
         // Do nothing
+    }
+
+    private void showModeSelectionDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Choose mode")
+                .setItems(new String[]{"Fast", "Slow", "Sensor"}, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0: // Fast
+                                gameManager.setSpeed(400);
+                                useSensor = false;
+                                break;
+                            case 1: // Slow
+                                gameManager.setSpeed(1100);
+                                useSensor = false;
+                                break;
+                            case 2: // Sensor
+                                gameManager.setSpeed(1000);
+                                useSensor = true;
+                                break;
+                        }
+                        loadMainLayout(); // Load the main layout after selecting the mode
+                    }
+                })
+                .show();
     }
 
     private void loadTopTenLayout() {
@@ -142,6 +169,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         });
 
         gameManager.startGame();
+
+        if (useSensor && accelerometer != null) {
+            sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_GAME);
+        }
     }
 
     public void showGameOverDialog(final int score) {
@@ -228,7 +259,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadMainLayout(); // Switch to the main layout when the play button is clicked
+                showModeSelectionDialog(); // Show the mode selection dialog when the play button is clicked
             }
         });
 

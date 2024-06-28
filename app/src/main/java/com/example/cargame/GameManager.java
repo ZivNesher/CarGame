@@ -21,7 +21,7 @@ public class GameManager {
     private MaterialTextView scoreValue;
     private Context context;
     private MainActivity activity;
-    private int speed = 1000;
+    private int speed;
     private int carLane = 8;
 
     public GameManager(Context context, MainActivity activity) {
@@ -68,6 +68,10 @@ public class GameManager {
         updateScore("0");
         resetHearts();
         clearObstacles();
+    }
+
+    public void setSpeed(int newSpeed) {
+        this.speed = newSpeed;
     }
 
     private void moveObstacles() {
@@ -132,10 +136,9 @@ public class GameManager {
             if (lives > 0) {
                 currentScore += 10;
                 // Increase speed every 100 points
-                speed = 1000 - (currentScore / 100) * 50;
-                // if (currentScore % 100 == 0) {
-                //     speed -= 50;
-                // }
+                 if (currentScore % 100 == 0 && speed > 200) {
+                     speed -= 50;
+                 }
             }
 
             updateScore(String.valueOf(currentScore));
