@@ -1,6 +1,7 @@
 package com.example.cargame;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.util.Log;
@@ -23,10 +24,12 @@ public class GameManager {
     private MainActivity activity;
     private int speed;
     private int carLane = 8;
+    private MediaPlayer crashSound;
 
     public GameManager(Context context, MainActivity activity) {
         this.context = context;
         this.activity = activity;
+        this.crashSound = MediaPlayer.create(context, R.raw.crash_sound);
     }
 
     public void initGameMatrix() {
@@ -98,7 +101,9 @@ public class GameManager {
 
             // Check if the car is hit by an obstacle
             if (obstacles[carLane - 1][carPosition].getVisibility() == View.VISIBLE && !("coin".equals(obstacles[carLane - 1][carPosition].getTag()))) {
-                //todo - check why the car loose lives when it hits the coin
+                if (crashSound != null) {
+                    crashSound.start();
+                }
                 lives -= 1;
                 v.vibrate(400);
                 if (lives == 2) {
